@@ -6,12 +6,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  @for (entry of data; track $index) {
+    <ion-row class="ion-no-padding">
+      <!--  Section Title -->
+      <ion-col size="9">
+        <h2 class="section-header">{{ entry.title }}</h2>
+      </ion-col>
+      <ion-col size="3" class="ion-text-end">
+        @if ($first) {
+          <ion-button fill="clear" color="light">
+            <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        }
+      </ion-col>
+  
+      <!-- Horizontal scroll view -->
+      <swiper-container [slidesPerView]="2.4" [slidesOffsetBefore]="20" [spaceBetween]="20" [freeMode]="true">
+        @for (album of entry.albums; track $index) {
+          <swiper-slide tappable (click)="openAlbum(album.title)">
+            <img [src]="'/assets/albums/' + album.image + '.jpg'">
+            <span class="title">{{ album.title }}</span>
+          </swiper-slide> 
+        }
+      </swiper-container>
+    </ion-row>
+  }
 </ion-content>

@@ -35,3 +35,34 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: normal;
+    src: url('/assets/fonts/spotify-regular.ttf');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-weight: bold;
+    src: url('/assets/fonts/spotify-bold.ttf');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-weight: lighter;
+    src: url('/assets/fonts/spotify-light.ttf');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+swiper-container {
+    --swiper-pagination-bullet-inactive-color: var(--ion-color-step-200, #cccccc);
+    --swiper-pagination-color: var(--ion-color-primary, #0054e9);
+    --swiper-pagination-progressbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+    --swiper-scrollbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+    --swiper-scrollbar-drag-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+}
