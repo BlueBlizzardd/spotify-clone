@@ -23,7 +23,6 @@ export class LoginPage implements OnInit {
     password: ['', Validators.required]
   })
 
-  // Pending: Making sure submission only happens if form is valid
   public submit$ = this.loginForm.events.pipe(
     filter(event => (event instanceof FormSubmittedEvent && event.source.valid)),
     map(submission => submission.source.value as { email: string, password: string }),

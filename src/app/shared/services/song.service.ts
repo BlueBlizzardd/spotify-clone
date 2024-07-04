@@ -11,8 +11,8 @@ export class SongService {
   private http = inject(HttpClient);
   private url = `${BASE_URL}/song`;
 
-  getSongs() {
-    return this.http.get(this.url).pipe(
+  getSongs(data: string) {
+    return this.http.get<any[]>(this.url).pipe(
       tap(res => console.log(res))
     );
   };

@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-searchbar animated="true" show-clear-button="focus" [formControl]="query" ngDefaultControl></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -12,6 +10,10 @@
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  @for (song of searchResults(); track $index) {
+    
+  }
 
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
