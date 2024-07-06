@@ -15,9 +15,14 @@
         <h2 class="section-header">{{ entry.title }}</h2>
       </ion-col>
       <ion-col size="3" class="ion-text-end">
-        @if ($first) {
-          <ion-button fill="clear" color="light">
+        @if ($first && isLoggedIn()) {
+          <ion-button fill="clear" color="light" routerLink="/settings">
             <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        }
+        @else if ($first) {
+          <ion-button fill="clear" color="light" routerLink="/login">
+            <ion-icon name="log-in" slot="icon-only"></ion-icon>
           </ion-button>
         }
       </ion-col>
@@ -25,9 +30,9 @@
       <!-- Horizontal scroll view -->
       <swiper-container [slidesPerView]="2.4" [slidesOffsetBefore]="20" [spaceBetween]="20" [freeMode]="true">
         @for (album of entry.albums; track $index) {
-          <swiper-slide tappable (click)="openAlbum(album.title)">
+          <swiper-slide tappable (click)="openAlbum(album.name)">
             <img [src]="'/assets/albums/' + album.image + '.jpg'">
-            <span class="title">{{ album.title }}</span>
+            <span class="name">{{ album.name }}</span>
           </swiper-slide> 
         }
       </swiper-container>

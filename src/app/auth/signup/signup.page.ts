@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCard, IonCol, I
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { EMPTY, catchError, filter, map, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,12 +17,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SignupPage implements OnInit {
 
   private fb = inject(FormBuilder);
+  private router = inject(Router);
   private authService = inject(AuthService);
 
   public signUpForm = this.fb.nonNullable.group({
     username: ['', Validators.required],
     email: ['', Validators.email],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.min(6), Validators.max(11)]],
   });
 
   public submit$ = this.signUpForm.events.pipe(
@@ -29,7 +31,7 @@ export class SignupPage implements OnInit {
     map(submission => submission.source.value as { username: string, email: string, password: string }),
     switchMap(data => this.authService.signUp(data.username, data.password, data.email).pipe(catchError(err => EMPTY))),
     takeUntilDestroyed()
-  ).subscribe();
+  ).subscribe(res => this.router.navigateByUrl('/tabs'));
 
   constructor() { }
 

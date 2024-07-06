@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>addPlaylist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="card-container">    
+    <ion-card class="ion-align-items-center">      
+      <ion-row>         
+        <ion-col size-md="9" size="12" class="welcome">          
+          <ion-card-header>            
+            <ion-card-title>Create Playlist</ion-card-title>          
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="playlistForm">
+              <ion-list>
+                <ion-item>
+                  <ion-input label="Name" labelPlacement="stacked" type="text" id="name" name="name" formControlName="name" required ngDefaultControl></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-button type="submit" shape="round" color="primary" size="default">Create</ion-button>
+                </ion-item>
+              </ion-list>
+            </form>                 
+          </ion-card-content>        
+        </ion-col>      
+      </ion-row>    
+    </ion-card>  
+  </div>
+</ion-content>

@@ -11,9 +11,13 @@
     </ion-toolbar>
   </ion-header>
 
-  @for (song of searchResults(); track $index) {
-    
-  }
+  <ion-list lines="none">
+    @if (searchResults()) {
+      <ion-item button detail="true" detailIcon="play-circle" (click)="state().playing ? pause() : play(searchResults()!)">
+        <ion-label>{{ searchResults()!.title }}</ion-label>
+      </ion-item>
+    }
+  </ion-list>
 
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>

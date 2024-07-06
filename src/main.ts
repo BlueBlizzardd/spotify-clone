@@ -7,7 +7,8 @@ import { register } from 'swiper/element/bundle'
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './app/shared/interceptors/auth.interceptor';
 
 if (environment.production) {
   enableProdMode();
@@ -20,6 +21,6 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
-    provideHttpClient()
+    provideHttpClient(withInterceptors([authInterceptor]))
   ],
 });

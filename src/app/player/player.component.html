@@ -1,0 +1,20 @@
+<div class="player">
+  <ion-progress-bar class="progress-bar" color="primary" [value]="state()!.currentTime! / state().duration!"></ion-progress-bar>
+  <ion-row class="ion-no-padding">
+    <ion-col size="2" class="ion-no-padding">
+      <img src="/assets/images/albums/when-we-all-fall-asleep.jpg">
+    </ion-col>
+    <ion-col size="8" class="ion-align-self-center">
+      <b>{{song.title}}</b><br>
+      <span>{{song.Album}}</span>
+    </ion-col>
+    <ion-col size="2" class="ion-text-center ion-no-padding ion-align-self-center">
+      @if (state().playing) {
+        <ion-icon name="pause-sharp" color="light" size="large" (click)="pause()"></ion-icon>  
+      }
+      @else {
+        <ion-icon name="play-sharp" color="light" size="large" (click)="play()"></ion-icon>
+      }
+    </ion-col>
+  </ion-row>
+</div>

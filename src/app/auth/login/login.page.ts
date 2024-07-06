@@ -5,6 +5,7 @@ import { FormBuilder, FormSubmittedEvent, FormsModule, ReactiveFormsModule, Vali
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCol, IonContent, IonHeader, IonRow, IonTitle, IonToolbar, IonItem, IonList } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { EMPTY, catchError, filter, map, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,12 @@ import { EMPTY, catchError, filter, map, switchMap } from 'rxjs';
 export class LoginPage implements OnInit {
 
   private fb = inject(FormBuilder);
+  private router = inject(Router);
   private authService: AuthService = inject(AuthService);
 
   public loginForm = this.fb.nonNullable.group({
     email: ['', Validators.email],
-    password: ['', Validators.required]
+    password: ['', [Validators.required, Validators.min(6), Validators.max(11)]]
   })
 
   public submit$ = this.loginForm.events.pipe(
@@ -28,7 +30,7 @@ export class LoginPage implements OnInit {
     map(submission => submission.source.value as { email: string, password: string }),
     switchMap(data => this.authService.login(data.email, data.password).pipe(catchError(err => EMPTY))),
     takeUntilDestroyed()
-  ).subscribe();
+  ).subscribe(res => this.router.navigateByUrl('/tabs'));
 
   ngOnInit() {
 
